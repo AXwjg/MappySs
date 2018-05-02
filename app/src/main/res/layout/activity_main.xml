@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/rl_all"
+    tools:context="mappyss.maphive.io.mappyss.MainActivity">
+
+    <RelativeLayout
+        android:id="@+id/search_rl"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/et_background"
+        >
+
+        <TextView
+            android:id="@+id/tv_in"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:layout_margin="2dp"
+            android:textColor="#000"
+            android:text="在"
+            android:layout_centerVertical="true"
+            />
+
+        <EditText
+            android:id="@+id/et_search_city"
+            android:layout_alignParentBottom="true"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="#000"
+            android:hint="city"
+            android:maxLines="1"
+            android:layout_toEndOf="@+id/tv_in"
+            android:gravity="left|center_vertical"
+            android:textSize="15dp"
+            android:singleLine="true"
+            android:layout_margin="2dp"
+            android:background="@null"
+            android:imeOptions="actionNext"
+            />
+
+        <TextView
+            android:id="@+id/tv_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:layout_margin="2dp"
+            android:textColor="#000"
+            android:text="市搜索"
+            android:layout_toEndOf="@+id/et_search_city"
+            android:layout_centerVertical="true"
+            />
+
+
+        <EditText
+            android:layout_alignParentBottom="true"
+            android:id="@+id/et_search"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="#000"
+            android:hint="Enter the found building"
+            android:maxLines="1"
+            android:gravity="left|center_vertical"
+            android:textSize="15dp"
+            android:layout_toEndOf="@+id/tv_search"
+            android:singleLine="true"
+            android:layout_margin="2dp"
+            android:imeOptions="actionDone"
+            android:paddingStart="5dp"
+            android:paddingEnd="34dp"
+            android:background="@null"
+            />
+
+        <ImageView
+            android:id="@+id/iv_deleted"
+            android:clickable="true"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/deleted"
+            android:layout_margin="5dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#fff"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="60dp"
+        android:id="@+id/ll"
+        >
+        <fragment
+            android:id="@+id/place_autocomplete_fragment"
+            android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+    </LinearLayout>
+
+    <mappyss.maphive.io.mappyss.StripListView
+        android:id="@+id/strip_lv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rl_search"
+        android:padding="10dp"
+        android:background="#ffffff"
+        android:layout_below="@id/search_rl"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:visibility="gone"/>
+
+
+    <com.baidu.mapapi.map.MapView
+        android:id="@+id/bmapView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true" />
+
+    <Button
+        android:id="@+id/screenshot_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_gravity="center_vertical"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/btn_search_bg"
+        android:text="截图" />
+
+    <Button
+        android:id="@+id/focus_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/screenshot_btn"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center_vertical"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="5dp"
+        android:layout_toLeftOf="@+id/screenshot_btn"
+        android:background="@drawable/btn_search_bg"
+        android:text="专注" />
+
+</RelativeLayout>
