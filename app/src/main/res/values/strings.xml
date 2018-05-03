@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BDScraper</string>
+    <string name="app_name">MapScraperBaidu</string>
     <string name="lacks_permission">The current application is missing the necessary permissions. \n\nPlease click \"设置\"\ - \"Permissions\" to open the required permissions. \n\nFinally, click the Back button twice to return.</string>
 
     <string name="default_country">China</string>

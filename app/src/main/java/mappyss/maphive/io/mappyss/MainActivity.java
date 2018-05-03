@@ -32,7 +32,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.baidu.mapapi.CoordType;
 import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.MapBaseIndoorMapInfo;
@@ -133,7 +132,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private final static String PATH = "custom_config_dark.json";
 
-//    public static final String BASE_SERVER = "http://lbscutmap.cherishi.com:8080";
+    // public static final String BASE_SERVER = "http://lbscutmap.cherishi.com:8080";
     public static final String BASE_SERVER = "http://10.0.10.48:8080";
 
     public static String IMAGEURL = BASE_SERVER + "/uploadImage";
@@ -145,7 +144,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // 注意该方法要再setContentView方法之前实现  样式地图
         MapView.setCustomMapStylePath(StringUtils.setMapCustomFile(this, PATH));
         SDKInitializer.initialize(getApplicationContext());
-//        SDKInitializer.setCoordType(CoordType.GCJ02); // 转换成国测坐标
+        // SDKInitializer.setCoordType(CoordType.GCJ02); // 转换成国测坐标
         setContentView(R.layout.activity_main);
 
         mContext = this;
@@ -153,7 +152,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         initView();
         initEvent();
-
 
     }
 
@@ -195,35 +193,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mBaiduMap.setMapStatus(MapStatusUpdateFactory.zoomTo(18));
 
         mFloorListAdapter = new BaseStripAdapter(mContext);
-        initGooglePlaces();
-    }
-
-    private void initGooglePlaces() {
-        PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment)
-                getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
-        LinearLayout ll = findViewById(R.id.ll);
-        ll.bringToFront();
-        ll.setVisibility(View.GONE);
-        autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
-            @Override
-            public void onPlaceSelected(Place place) {
-                if (place == null) {
-                    return;
-                }
-                LatLng latLng = new LatLng(place.getLatLng().latitude, place.getLatLng().longitude);
-                LatLng tolatLng = new CoordinateConverter().from(CoordinateConverter.CoordType.COMMON).coord(latLng).convert();
-
-                currentPoiBean = new PoiBean(place.getName().toString(), place.getAddress().toString(), tolatLng);
-                mBaiduMap.setMapStatus(MapStatusUpdateFactory.newLatLng(new LatLng(tolatLng.latitude, tolatLng.longitude)));
-                mBaiduMap.setMapStatus(MapStatusUpdateFactory.zoomTo(19));
-
-            }
-
-            @Override
-            public void onError(Status status) {
-                Log.e("----google place error", "An error occurred: " + status);
-            }
-        });
     }
 
     private void initEvent() {
@@ -297,7 +266,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 mFloorListAdapter.notifyDataSetInvalidated();
             }
         });
-
         // 地图改变监听，方便获取地图中心位置
         mBaiduMap.setOnMapStatusChangeListener(onMapStatusChangeListener);
 
@@ -672,8 +640,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             switch (msg.what) {
                 case SUCCESS:
                     if (currentFloorIndex != 0) {
-//                        mFloorListAdapter.setSelectedPostion(floorList.size() - 1 - currentFloorIndex);
-//                        mFloorListAdapter.notifyDataSetChanged();
                         screenshot(diyFloors.get(currentFloorIndex));
                     } else {
                         isSs = false;
